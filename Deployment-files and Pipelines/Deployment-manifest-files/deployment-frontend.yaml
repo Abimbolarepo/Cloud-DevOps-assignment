@@ -1,0 +1,33 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: frontend-application
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend-projecttask 
+  template:
+    metadata:
+      labels:
+        app: frontend-projecttask  
+    spec:
+      containers:
+        - name: frontend-projecttask-container
+          image: abimbolacontainerregistry.azurecr.io/frontendapp:675
+          ports:
+          - containerPort: 8080
+      imagePullSecrets:
+      - name: new-secret
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: frontend-projecttask-service
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 8080
+    selector:
+        app: frontend-projecttask

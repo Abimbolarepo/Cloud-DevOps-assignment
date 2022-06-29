@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-application
+  labels:
+    app: backend-projecttask 
+spec:
+  selector:
+    matchLabels:
+      app: backend-projecttask 
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: backend-projecttask 
+    spec:
+      imagePullSecrets:
+      - name: new-secret1
+      containers:
+      - image: abimbolacontainerregistry.azurecr.io/backendapp:676
+        name: backend-projecttask-container
+        ports:
+        - containerPort: 8080
+          name: port-name 
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: wordpress-mysql
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+        volumeMounts:
+        - name: backend-persistent-storage
+          mountPath: /var/www/html
+      volumes:
+      - name: backend-persistent-storage
+        persistentVolumeClaim:
+          claimName: azure-managed-disk1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-application-service
+  labels:
+    app: backend-projecttask 
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: backend-projecttask 
+  clusterIP: None

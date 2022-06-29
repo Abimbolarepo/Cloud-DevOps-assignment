@@ -1,0 +1,21 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: KubectlInstaller@0
+  inputs:
+    kubectlVersion: 'latest'
+- task: KubernetesManifest@0
+  displayName: deploy
+  inputs:
+    kubernetesServiceConnection: 'Abimbola-acr'
+    manifests: 'Deployment-manifest-files/deployment-frontend.yaml'
+    imagePullSecrets: 'new-secret'
