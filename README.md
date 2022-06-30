@@ -4,7 +4,7 @@ In this assigment I used the Microsoft Azure cloud resources to carry out the op
 
 ![DevOps workflow](https://user-images.githubusercontent.com/95041171/176384192-d75b2a9b-f089-4944-bf04-cd60397a200b.png)
 
-Note: The Deployments and YAML pipelines that are screenshot in this writeup are in the repository, you can check them out.
+Note: The Deployment files and YAML pipelines that are screenshot in this writeup are in the repository, you can check them out.
 
                                                         Tools used:
 
