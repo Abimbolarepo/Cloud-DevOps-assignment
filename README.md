@@ -119,7 +119,7 @@ Persistent volume claim to persist the data in MySQL database bound successfully
                                     
 ![image](https://user-images.githubusercontent.com/95041171/176226299-99e18016-f0f6-41a2-98e5-2603b82eee95.png)
 
-The MySQL environment variables was used to deploy the backend application as it can be seen in the YAML pipeline.
+The MySQL environment variables was used to deploy the backend application as it can be seen in the deployment file.
 
                                                  Monitoring the Infrastructure
                                                     
